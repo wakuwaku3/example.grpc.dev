@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  protoc-go:
+    build: ./protoc-go
+    environment:
+      GITHUB_USER_NAME: ${GITHUB_USER_NAME}
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_EMAIL: ${GITHUB_EMAIL}
+    volumes:
+      - "protoc-go:/repo"
+      - "protoc-go.go.1.5:/go"
+    tty: true
+volumes:
+  protoc-go:
+  protoc-go.go.1.5:
