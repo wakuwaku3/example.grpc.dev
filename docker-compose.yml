@@ -9,8 +9,36 @@ services:
       GITHUB_EMAIL: ${GITHUB_EMAIL}
     volumes:
       - "protoc-go:/repo"
-      - "protoc-go.go.1.5:/go"
+      - "protoc-go.go.1.13:/go"
+    ports:
+      - "52300:52300"
+    tty: true
+  api:
+    build: ./api
+    environment:
+      GITHUB_USER_NAME: ${GITHUB_USER_NAME}
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_EMAIL: ${GITHUB_EMAIL}
+    volumes:
+      - "api:/repo"
+      - "api.go.1.13:/go"
+    ports:
+      - "8080:8080"
+    tty: true
+  client:
+    build: ./client
+    environment:
+      GITHUB_USER_NAME: ${GITHUB_USER_NAME}
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_EMAIL: ${GITHUB_EMAIL}
+    volumes:
+      - "client:/repo"
+      - "client.go.1.13:/go"
     tty: true
 volumes:
   protoc-go:
-  protoc-go.go.1.5:
+  protoc-go.go.1.13:
+  api:
+  api.go.1.13:
+  client:
+  client.go.1.13:
