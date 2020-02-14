@@ -25,6 +25,13 @@ services:
     ports:
       - "8080:8080"
     tty: true
+  proxy:
+    build: ./proxy
+    ports:
+      - "8000:8000"
+    tty: true
+    depends_on:
+      - api
   client:
     build: ./client
     environment:
@@ -35,6 +42,21 @@ services:
       - "client:/repo"
       - "client.go.1.13:/go"
     tty: true
+    depends_on:
+      - api
+  web:
+    build: ./web
+    environment:
+      GITHUB_USER_NAME: ${GITHUB_USER_NAME}
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_EMAIL: ${GITHUB_EMAIL}
+    volumes:
+      - "web:/repo"
+    ports:
+      - "3000:3000"
+    tty: true
+    depends_on:
+      - proxy
 volumes:
   protoc-go:
   protoc-go.go.1.13:
@@ -42,3 +64,4 @@ volumes:
   api.go.1.13:
   client:
   client.go.1.13:
+  web:

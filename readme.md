@@ -1,5 +1,12 @@
 # example.grpc.dev
 
+## relational repositories
+
+- <https://github.com/wakuwaku3/example.grpc.proto>
+- <https://github.com/wakuwaku3/example.grpc.go.api>
+- <https://github.com/wakuwaku3/example.grpc.go.client>
+- <https://github.com/wakuwaku3/example.grpc.web>
+
 ## usage
 
 - up
@@ -48,4 +55,10 @@ docker-compose exec api go run ./
 
 ```sh
 docker-compose exec client go run ./
+```
+
+- run web
+
+```sh
+docker-compose exec web npm start
 ```
