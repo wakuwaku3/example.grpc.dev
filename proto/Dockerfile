@@ -1,6 +1,6 @@
 FROM golang:1.13.7-buster
 
-LABEL Name="example.grpc.protoc-go"
+LABEL Name="example.grpc.proto"
 LABEL Version="1.0.0"
 
 WORKDIR /

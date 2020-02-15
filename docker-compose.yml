@@ -1,15 +1,14 @@
 version: "3"
-
 services:
-  protoc-go:
-    build: ./protoc-go
+  proto:
+    build: ./proto
     environment:
       GITHUB_USER_NAME: ${GITHUB_USER_NAME}
       GITHUB_TOKEN: ${GITHUB_TOKEN}
       GITHUB_EMAIL: ${GITHUB_EMAIL}
     volumes:
-      - "protoc-go:/repo"
-      - "protoc-go.go.1.13:/go"
+      - "proto:/repo"
+      - "proto.go.1.13:/go"
     ports:
       - "52300:52300"
     tty: true
@@ -32,15 +31,26 @@ services:
     tty: true
     depends_on:
       - api
-  client:
-    build: ./client
+  client-go:
+    build: ./client-go
     environment:
       GITHUB_USER_NAME: ${GITHUB_USER_NAME}
       GITHUB_TOKEN: ${GITHUB_TOKEN}
       GITHUB_EMAIL: ${GITHUB_EMAIL}
     volumes:
-      - "client:/repo"
-      - "client.go.1.13:/go"
+      - "client-go:/repo"
+      - "client-go.go.1.13:/go"
+    tty: true
+    depends_on:
+      - api
+  client-ruby:
+    build: ./client-ruby
+    environment:
+      GITHUB_USER_NAME: ${GITHUB_USER_NAME}
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_EMAIL: ${GITHUB_EMAIL}
+    volumes:
+      - "client-ruby:/repo"
     tty: true
     depends_on:
       - api
@@ -58,10 +68,11 @@ services:
     depends_on:
       - proxy
 volumes:
-  protoc-go:
-  protoc-go.go.1.13:
+  proto:
+  proto.go.1.13:
   api:
   api.go.1.13:
-  client:
-  client.go.1.13:
+  client-go:
+  client-go.go.1.13:
+  client-ruby:
   web:
