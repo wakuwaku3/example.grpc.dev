@@ -1,17 +1,5 @@
 version: "3"
 services:
-  proto:
-    build: ./proto
-    environment:
-      GITHUB_USER_NAME: ${GITHUB_USER_NAME}
-      GITHUB_TOKEN: ${GITHUB_TOKEN}
-      GITHUB_EMAIL: ${GITHUB_EMAIL}
-    volumes:
-      - "proto:/repo"
-      - "proto.go.1.13:/go"
-    ports:
-      - "52300:52300"
-    tty: true
   api:
     build: ./api
     environment:
@@ -23,6 +11,7 @@ services:
       - "api.go.1.13:/go"
     ports:
       - "8080:8080"
+      - "52300:52300"
     tty: true
   proxy:
     build: ./proxy
@@ -68,8 +57,6 @@ services:
     depends_on:
       - proxy
 volumes:
-  proto:
-  proto.go.1.13:
   api:
   api.go.1.13:
   client-go:

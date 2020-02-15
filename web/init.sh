@@ -9,5 +9,6 @@ if [ ! -d /repo/.git ]; then
 fi
 
 cd /repo/
-# npm install
+npm install
+npm run postinstall
 sh -c "while :; do sleep 10; done"
