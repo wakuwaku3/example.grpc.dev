@@ -1,4 +1,4 @@
-FROM golang:1.13.7-buster
+FROM golang:buster
 
 LABEL Name="example.grpc.go.client"
 LABEL Version="1.0.0"

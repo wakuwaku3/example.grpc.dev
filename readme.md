@@ -10,50 +10,20 @@ gRPC の学習用の開発環境を docker-compose で提供する。
 - HTTP リクエストと gRPC リクエストを返還するためのプロキシ
 - Typescript + React で書かれた Web アプリ
 
-## relational repositories
-
-- <https://github.com/wakuwaku3/example.grpc.proto>
-- <https://github.com/wakuwaku3/example.grpc.go.api>
-- <https://github.com/wakuwaku3/example.grpc.go.client>
-- <https://github.com/wakuwaku3/example.grpc.ruby.client>
-- <https://github.com/wakuwaku3/example.grpc.web>
-
 ## usage
+
+### 環境変数を設定
+
+- GITHUB_USER_NAME
+- GITHUB_EMAIL
+- GITHUB_TOKEN
+
+### コマンドを実行
 
 - up
 
 ```sh
-docker-compose up
-```
-
-- down
-
-```sh
-docker-compose down
-```
-
-- build
-
-```sh
-docker-compose up --build
-```
-
-- start
-
-```sh
-docker-compose start
-```
-
-- stop
-
-```sh
-docker-compose stop
-```
-
-- view document
-
-```sh
-docker-compose exec proto npm start
+docker-compose up --build -d
 ```
 
 - run api
@@ -77,5 +47,5 @@ docker-compose exec client-ruby bundle exec ruby main.rb
 - run web
 
 ```sh
-docker-compose exec web npm start
+docker-compose exec web make serve
 ```

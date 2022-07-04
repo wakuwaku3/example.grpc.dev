@@ -1,4 +1,4 @@
-FROM node:12.14.0-buster
+FROM node:16-buster
 
 LABEL Name="example.grpc.web"
 LABEL Version="1.0.0"

@@ -8,18 +8,27 @@ services:
       GITHUB_EMAIL: ${GITHUB_EMAIL}
     volumes:
       - "api:/repo"
-      - "api.go.1.13:/go"
+      - "api.go.1.18:/go"
     ports:
       - "8080:8080"
-      - "52300:52300"
+      - "8081:8081"
     tty: true
-  proxy:
-    build: ./proxy
+  proxy-backward-bff:
+    build: ./proxy/backward
+    ports:
+      - "8001:8001"
+    tty: true
+    volumes:
+      - "proxy-backward-bff:/repo"
+    depends_on:
+      - api
+  proxy-conversion:
+    build: ./proxy/conversion
     ports:
       - "8000:8000"
     tty: true
     depends_on:
-      - api
+      - proxy-backward-bff
   client-go:
     build: ./client-go
     environment:
@@ -28,7 +37,7 @@ services:
       GITHUB_EMAIL: ${GITHUB_EMAIL}
     volumes:
       - "client-go:/repo"
-      - "client-go.go.1.13:/go"
+      - "client-go.go.1.18:/go"
     tty: true
     depends_on:
       - api
@@ -55,11 +64,12 @@ services:
       - "3000:3000"
     tty: true
     depends_on:
-      - proxy
+      - proxy-backward-bff
 volumes:
   api:
-  api.go.1.13:
+  api.go.1.18:
   client-go:
-  client-go.go.1.13:
+  client-go.go.1.18:
   client-ruby:
   web:
+  proxy-backward-bff:
